@@ -57,12 +57,33 @@ describe Calculate do
   end
 
   describe '::random_number_string' do
-  
-  it 'generates random number string with leading zeros if neccessary thats equal to 5 digits in length'
-  end
+    
+    it 'should be type string' do
+      Calculate.random_number_string.should be_a(String)
+    end
+
+    it 'generates string with length of 5' do
+      expect(Calculate.random_number_string.length).to be(5)
+    end
+
+    it 'generates random number string with leading zeros if neccessary thats equal to 5 digits in length' do
+      expect(Calculate.random_number_string.length).to be(5)
+    end
   end
 
-  describe '::shifts' do
-  skip
+  describe '::shift' do
+    it 'returns shift hash thats the sum of keys and offsets hashes ' do 
+      key_hash = {a_key:'12',b_key:'50',c_key:'81',d_key:'17' }
+      offset_hash = {a_offset:60,b_offset:50,c_offset:39,d_offset:67 }
+
+      expect(Calculate.shift(key_hash,offset_hash)).to include({a_shift:72,b_shift:100,c_shift:120,d_shift:84 })
+    end
+
+    it 'returns shift hash thats the sum of keys and offsets hashes test 2 ' do 
+      key_hash = {a_key:'16',b_key:'09',c_key:'23',d_key:'05' }
+      offset_hash = {a_offset:18,b_offset:10,c_offset:16,d_offset:37 }
+
+      expect(Calculate.shift(key_hash,offset_hash)).to include({a_shift:34,b_shift:19,c_shift:39,d_shift:42 })
+    end
   end
 end

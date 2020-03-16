@@ -37,7 +37,7 @@ module Calculate
       date_offsets
     end
 
-    def keys(num_string = "02715")
+    def keys(num_string = random_number_string)
       digit_keys = {
         a_key:'',
         b_key:'',
@@ -53,7 +53,26 @@ module Calculate
 
       digit_keys
     end
+
+    def random_number_string
+      number_string = rand(100000).to_s
+
+      while number_string.length < 5
+        number_string = '0'+ number_string
+      end
+
+      number_string
+    end
+
+    def shift(key_hash,offset_hash)
+      shift_hash = {
+        a_shift: key_hash[:a_key].to_i + offset_hash[:a_offset],
+        b_shift: key_hash[:b_key].to_i  + offset_hash[:b_offset],
+        c_shift: key_hash[:c_key].to_i  + offset_hash[:c_offset],
+        d_shift: key_hash[:d_key].to_i  + offset_hash[:d_offset],
+      }
+      shift_hash
+    end
   end
 end
 
-puts Calculate.keys
