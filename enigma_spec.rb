@@ -14,8 +14,13 @@ describe Enigma do
 
       
       expect{enigma.encrypt("he11o world", "02715", "040895")}.to raise_error(ArgumentError)
-    end
-    
-      
+    end 
   end 
+  describe '#decrypt' do
+    it 'returns hash containing decryption, key, and date' do
+      enigma = Enigma.new
+      
+      expect(enigma.decrypt("keder ohulw","02715", "040895")).to include({decryption: "hello world", key: "02715", date: "040895"})
+    end
+  end
 end 
