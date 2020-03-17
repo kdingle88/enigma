@@ -8,11 +8,13 @@ module Calculate
 
     def format_date(date = nil)
       today_date = Date.today
+      require 'pry'
+      binding.pry
       x = date.match?(/^\d+$/) if date != nil
 
       raise ArgumentError if date != nil && date.length != 6
       raise ArgumentError if date != nil && !x
-      
+
       return today_date.strftime("%m%d%y") if date == nil
 
       return date

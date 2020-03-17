@@ -1,4 +1,4 @@
-require_relative 'enigma.rb'
+require './lib/enigma'
 
 enigma = Enigma.new
 
