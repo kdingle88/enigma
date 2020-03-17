@@ -17,8 +17,6 @@ describe Calculate do
       expect(Calculate.format_date).to eql(today_date_formatted)
     end
     it 'if date passed in, return passed in value', :focus do
-      require 'pry'
-      binding.pry
       expect(Calculate.format_date("123456")).to eql("123456")
     end
     it 'if date passed in, raises error if length does not equal 6' do

@@ -6,18 +6,21 @@ module Calculate
       ("a".."z").to_a << " "
     end
 
-    def format_date(date = nil)
-      today_date = Date.today
-      require 'pry'
-      binding.pry
-      x = date.match?(/^\d+$/) if date != nil
+    def format_date(date)
+      if (valid_date?(date))
+        date
+      else
+        Date.today.strftime("%m%d%y")
+      end
+      # today_date = Date.today
+      # x = date.match?(/^\d+$/) if date != nil
 
-      raise ArgumentError if date != nil && date.length != 6
-      raise ArgumentError if date != nil && !x
+      # raise ArgumentError if date != nil && date.length != 6
+      # raise ArgumentError if date != nil && !x
 
-      return today_date.strftime("%m%d%y") if date == nil
+      # return today_date.strftime("%m%d%y") if date == nil
 
-      return date
+      # date
     end
     def offsets(formatted_date)
       date_offsets = {
@@ -76,5 +79,12 @@ module Calculate
       shift_hash
     end
   end
-end
 
+  private
+
+  def self.valid_date?(date)
+    require 'pry'
+    binding.pry
+    /^\d+$/.match?(date) if date != nil
+  end
+end
