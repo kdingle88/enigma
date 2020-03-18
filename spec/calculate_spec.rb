@@ -1,6 +1,7 @@
-require 'rspec/autorun'
+# require 'rspec/autorun'
+require 'rspec'
 require 'date'
-require_relative 'calculate'
+require './lib/calculate'
 
 describe Calculate do
   describe '::character_set' do
@@ -16,7 +17,7 @@ describe Calculate do
 
       expect(Calculate.format_date).to eql(today_date_formatted)
     end
-    it 'if date passed in, return passed in value' do
+    it 'if date passed in, return passed in value', :focus do
       expect(Calculate.format_date("123456")).to eql("123456")
     end
     it 'if date passed in, raises error if length does not equal 6' do
@@ -26,9 +27,9 @@ describe Calculate do
       expect{Calculate.format_date("453f34")}.to raise_error(ArgumentError)
     end
   end
-  
+
   describe '::offsets' do
-    
+
     it 'returns hash containing last four digits of date squared' do
       formatted_date = '011519'
 
@@ -39,7 +40,7 @@ describe Calculate do
 
       expect(Calculate.offsets(formatted_date)).to include({a_offset:1,b_offset:2,c_offset:8,d_offset:9 })
     end
-    
+
   end
 
   describe '::keys' do
@@ -57,9 +58,9 @@ describe Calculate do
   end
 
   describe '::random_number_string' do
-    
+
     it 'should be type string' do
-      Calculate.random_number_string.should be_a(String)
+      expect(Calculate.random_number_string).to be_a(String)
     end
 
     it 'generates string with length of 5' do
@@ -72,14 +73,14 @@ describe Calculate do
   end
 
   describe '::shift' do
-    it 'returns shift hash thats the sum of keys and offsets hashes ' do 
+    it 'returns shift hash thats the sum of keys and offsets hashes ' do
       key_hash = {a_key:'12',b_key:'50',c_key:'81',d_key:'17' }
       offset_hash = {a_offset:60,b_offset:50,c_offset:39,d_offset:67 }
 
       expect(Calculate.shift(key_hash,offset_hash)).to include({a_shift:72,b_shift:100,c_shift:120,d_shift:84 })
     end
 
-    it 'returns shift hash thats the sum of keys and offsets hashes test 2 ' do 
+    it 'returns shift hash thats the sum of keys and offsets hashes test 2 ' do
       key_hash = {a_key:'16',b_key:'09',c_key:'23',d_key:'05' }
       offset_hash = {a_offset:18,b_offset:10,c_offset:16,d_offset:37 }
 
