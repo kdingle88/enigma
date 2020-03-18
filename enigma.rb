@@ -1,6 +1,6 @@
-require './lib/calculate'
+require_relative 'calculate.rb' 
 
-class Enigma
+class Enigma 
   def encrypt(message, key = Calculate.random_number_string, date = Calculate.format_date)
 
     raise ArgumentError if !message.match?(/^[a-zA-Z\s]*$/)
@@ -15,7 +15,7 @@ class Enigma
 
     message_array = message.downcase.split('')
 
-    encrypt_message = message_array.map.with_index  do |char,index|
+    encrypt_message = message_array.map.with_index  do |char,index| 
     if index % 4 ==0
       new_index = char_shifts[:a_shift] + encrypt_chars.index(char)
 
@@ -38,12 +38,12 @@ class Enigma
     end
   end
 
-    {
+    { 
       encryption: encrypt_message.join,
       key: key,
       date: date
     }
-
+    
   end
   def decrypt(message, key = Calculate.random_number_string, date = Calculate.format_date)
     #Do error checking raise errors if message contains non a-z
@@ -59,19 +59,19 @@ class Enigma
 
     message_array = message.downcase.split('')
 
-    decrypt_message = message_array.map.with_index  do |char,index|
+    decrypt_message = message_array.map.with_index  do |char,index| 
     if index % 4 ==0
       new_index = decrypt_chars.index(char) - char_shifts[:a_shift]
 
       decrypt_chars[(new_index % 27)]
 
     elsif index % 4 ==1
-      new_index = decrypt_chars.index(char) - char_shifts[:b_shift]
+      new_index = decrypt_chars.index(char) - char_shifts[:b_shift] 
 
       decrypt_chars[(new_index % 27)]
 
     elsif index % 4 ==2
-      new_index = decrypt_chars.index(char) - char_shifts[:c_shift]
+      new_index = decrypt_chars.index(char) - char_shifts[:c_shift] 
 
       decrypt_chars[(new_index % 27)]
 
@@ -82,7 +82,7 @@ class Enigma
     end
   end
 
-    {
+    { 
       decryption: decrypt_message.join,
       key: key,
       date: date
