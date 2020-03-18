@@ -2,7 +2,10 @@
 RSpec.configure do |config|
 
   # Enigma Specific Settings
-  config.filter_run_when_matching :focus
+
+  # config.filter_run_when_matching :focus
+  config.example_status_persistence_file_path = "tmp/examples.txt"
+  config.run_all_when_everything_filtered = true
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

@@ -1,4 +1,4 @@
-require 'rspec/autorun'
+require 'rspec'
 require './lib/calculate'
 require './lib/enigma'
 

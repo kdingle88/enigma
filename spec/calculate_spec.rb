@@ -1,4 +1,5 @@
-require 'rspec/autorun'
+# require 'rspec/autorun'
+require 'rspec'
 require 'date'
 require './lib/calculate'
 
@@ -59,7 +60,7 @@ describe Calculate do
   describe '::random_number_string' do
 
     it 'should be type string' do
-      Calculate.random_number_string.should be_a(String)
+      expect(Calculate.random_number_string).to be_a(String)
     end
 
     it 'generates string with length of 5' do

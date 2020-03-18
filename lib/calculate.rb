@@ -6,22 +6,11 @@ module Calculate
       ("a".."z").to_a << " "
     end
 
-    def format_date(date)
-      if (valid_date?(date))
-        date
-      else
-        Date.today.strftime("%m%d%y")
-      end
-      # today_date = Date.today
-      # x = date.match?(/^\d+$/) if date != nil
+    def format_date(date = Date.today.strftime("%m%d%y"))
 
-      # raise ArgumentError if date != nil && date.length != 6
-      # raise ArgumentError if date != nil && !x
-
-      # return today_date.strftime("%m%d%y") if date == nil
-
-      # date
+      valid_date?(date) ? date : (raise ArgumentError)
     end
+    
     def offsets(formatted_date)
       date_offsets = {
       a_offset:0,
@@ -83,8 +72,9 @@ module Calculate
   private
 
   def self.valid_date?(date)
-    require 'pry'
-    binding.pry
-    /^\d+$/.match?(date) if date != nil
+    date.match?(/^\d+$/) && date.length == 6
+
   end
 end
+
+
