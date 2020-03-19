@@ -1,4 +1,3 @@
-# require 'rspec/autorun'
 require 'rspec'
 require 'date'
 require './lib/calculate'
