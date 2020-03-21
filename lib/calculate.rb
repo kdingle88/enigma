@@ -41,6 +41,7 @@ module Calculate
       end
 
       number_string
+      
     end
     
 

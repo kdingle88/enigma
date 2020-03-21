@@ -1,6 +1,7 @@
 require 'rspec'
 require './lib/enigma'
 
+
 RSpec.describe Enigma do
   describe '#encrypt' do
     context 'contains params message, key, and date' do

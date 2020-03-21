@@ -19,7 +19,7 @@ RSpec.describe Calculate do
 
       context 'when date passed in' do
 
-        it 'return passed in value', :focus do
+        it 'return passed in value'  do
           expect(Calculate.format_date("123456")).to eql("123456")
         end
 
