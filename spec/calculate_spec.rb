@@ -47,11 +47,11 @@ RSpec.describe Calculate do
   end
 
   describe '::keys' do
-    it 'splits random 5 digit number into 4 two-digit hash entries' do
+    it 'splits 5 digit number into 4 two-digit hash entries' do
       expect(Calculate.keys("02715")).to include({a_key:'02',b_key:'27',c_key:'71',d_key:'15' })
     end
 
-    it 'splits random 5 digit number into 4 two-digit hash entries test 2' do
+    it 'splits 5 digit number into 4 two-digit hash entries test 2' do
       expect(Calculate.keys("00813")).to include({a_key:'00',b_key:'08',c_key:'81',d_key:'13' })
     end
   end
