@@ -15,10 +15,10 @@ module Calculate
       last_four_digits = offset_digits(formatted_date)
   
       {
-        a_offset: last_four_digits[3],
-        b_offset: last_four_digits[2],
-        c_offset: last_four_digits[1],
-        d_offset: last_four_digits[0]
+        a_offset: last_four_digits[0],
+        b_offset: last_four_digits[1],
+        c_offset: last_four_digits[2],
+        d_offset: last_four_digits[3]
       }
     end
 
@@ -67,7 +67,10 @@ module Calculate
     def offset_digits(formatted_date)
       date_squared = formatted_date.to_i**2
 
-      date_squared.to_s.split('').last(4).join.to_i.digits
+      # date_squared.to_s.split('').last(4).join.to_i.digits
+      num = date_squared.to_s.split('').map {|x| x.to_i}.last(4)
+
+      num
     end
 
     def num_sets(num_string)
