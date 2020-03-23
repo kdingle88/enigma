@@ -8,7 +8,7 @@ module Calculate
     end
 
     def format_date(date = Date.today.strftime("%m%d%y"))
-      valid_date?(date) ? date : (raise ArgumentError)
+      valid_date?(date) ? date : (raise ArgumentError, "date can only contain numbers had has to be a length of 6")
     end
 
     def offsets(formatted_date)

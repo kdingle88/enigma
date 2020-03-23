@@ -72,7 +72,7 @@ class Enigma
     end
 
     def message_match(message)
-      message.match?(/^[a-zA-Z\s]*$/) ? message : (raise ArgumentError)
+      message.match?(/^[a-zA-Z\s]*$/) ? message : (raise ArgumentError, "Message can only contain 'a-z' and ' ' charactors. Please edit your message to only include those charactors")
     end
 
     def zero_padding(num_string)
