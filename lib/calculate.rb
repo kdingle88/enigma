@@ -35,13 +35,6 @@ module Calculate
 
     def random_number_string
       number_string = rand(100000).to_s
-
-      while number_string.length < 5
-        number_string = '0'+ number_string
-      end
-
-      number_string
-      
     end
     
 
@@ -54,6 +47,8 @@ module Calculate
       }
       
     end
+
+    
   
 
     private
@@ -76,6 +71,8 @@ module Calculate
     def num_sets(num_string)
       num_string.split('').each_cons(2).map(&:join)
     end
+
+    
 
 end
 

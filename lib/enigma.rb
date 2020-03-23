@@ -6,6 +6,7 @@ class Enigma
   def encrypt(message, key = random_number_string, date = format_date)
 
     message_match(message)
+    pad_key = zero_padding(key)
 
     {
       encryption: encrpyt_message(message, shift(keys(key), offsets(date))),
@@ -18,22 +19,25 @@ class Enigma
   def decrypt(message, key = random_number_string, date = format_date)
 
     message_match(message)
+    pad_key = zero_padding(key)
 
     {
-      decryption: decrypt_message(message, shift(keys(key), offsets(date))),
-      key: key,
+      decryption: decrypt_message(message, shift(keys(pad_key), offsets(date))),
+      key: pad_key,
       date: date
     }
   
   end
 
   def crack(message, date = format_date)
-    random_decrypt = decrypt(message, random_number_string,date)
+    num_count = 0
+    random_decrypt = decrypt(message, num_count.to_s,date)
 
     last_four_decrypt = random_decrypt[:decryption].split('').slice(-4,4).join
 
     until last_four_decrypt == " end"
-      random_decrypt = decrypt(message, random_number_string,date)
+      num_count+= 1
+      random_decrypt = decrypt(message, num_count.to_s,date)
       last_four_decrypt = random_decrypt[:decryption].split('').slice(-4,4).join
     end
 
@@ -65,5 +69,13 @@ class Enigma
 
     def message_match(message)
       message.match?(/^[a-zA-Z\s]*$/) ? message : (raise ArgumentError)
+    end
+    
+    def zero_padding(num_string)
+      while num_string.length < 5
+        num_string = '0'+ num_string
+      end
+
+      num_string
     end
 end
