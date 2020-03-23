@@ -1,96 +1,69 @@
 require './lib/calculate'
 
 class Enigma
-  def encrypt(message, key = Calculate.random_number_string, date = Calculate.format_date)
+  include Calculate
 
-    raise ArgumentError if !message.match?(/^[a-zA-Z\s]*$/)
+  def encrypt(message, key = random_number_string, date = format_date)
 
-    encrypt_chars = Calculate.character_set
-
-    char_offsets = Calculate.offsets(date)
-
-    key_hash = Calculate.keys(key)
-
-    char_shifts = Calculate.shift(key_hash, char_offsets)
-
-    message_array = message.downcase.split('')
-
-    encrypt_message = message_array.map.with_index  do |char,index|
-    if index % 4 ==0
-      new_index = char_shifts[:a_shift] + encrypt_chars.index(char)
-
-      encrypt_chars[(new_index % 27)]
-
-    elsif index % 4 ==1
-      new_index = char_shifts[:b_shift] + encrypt_chars.index(char)
-
-      encrypt_chars[(new_index % 27)]
-
-    elsif index % 4 ==2
-      new_index = char_shifts[:c_shift] + encrypt_chars.index(char)
-
-      encrypt_chars[(new_index % 27)]
-
-    elsif index % 4 ==3
-      new_index = char_shifts[:d_shift] + encrypt_chars.index(char)
-
-      encrypt_chars[(new_index % 27)]
-    end
-  end
+    message_match(message)
 
     {
-      encryption: encrypt_message.join,
+      encryption: encrpyt_message(message, shift(keys(key), offsets(date))),
       key: key,
       date: date
     }
 
   end
-  def decrypt(message, key = Calculate.random_number_string, date = Calculate.format_date)
-    #Do error checking raise errors if message contains non a-z
-    raise ArgumentError if !message.match?(/^[a-zA-Z\s]*$/)
 
-    decrypt_chars = Calculate.character_set
+  def decrypt(message, key = random_number_string, date = format_date)
 
-    char_offsets = Calculate.offsets(date)
-
-    key_hash = Calculate.keys(key)
-
-    char_shifts = Calculate.shift(key_hash, char_offsets)
-
-    message_array = message.downcase.split('')
-
-    decrypt_message = message_array.map.with_index  do |char,index|
-    if index % 4 ==0
-      new_index = decrypt_chars.index(char) - char_shifts[:a_shift]
-
-      decrypt_chars[(new_index % 27)]
-
-    elsif index % 4 ==1
-      new_index = decrypt_chars.index(char) - char_shifts[:b_shift]
-
-      decrypt_chars[(new_index % 27)]
-
-    elsif index % 4 ==2
-      new_index = decrypt_chars.index(char) - char_shifts[:c_shift]
-
-      decrypt_chars[(new_index % 27)]
-
-    elsif index % 4 ==3
-      new_index = decrypt_chars.index(char) -char_shifts[:d_shift]
-
-      decrypt_chars[(new_index % 27)]
-    end
-  end
+    message_match(message)
 
     {
-      decryption: decrypt_message.join,
+      decryption: decrypt_message(message, shift(keys(key), offsets(date))),
       key: key,
       date: date
     }
+  
   end
+
+  def crack(message, date = format_date)
+    random_decrypt = decrypt(message, random_number_string,date)
+
+    last_four_decrypt = random_decrypt[:decryption].split('').last(4).join
+
+    until last_four_decrypt == " end"
+      random_decrypt = decrypt(message, random_number_string,date)
+      last_four_decrypt = random_decrypt[:decryption].split('').last(4).join
+    end
+
+    random_decrypt
+  end
+
+
+  private
+  
+    def encrpyt_message(msg, shifts)
+      encrypt_msg = msg.downcase.split('').map.with_index  do |char,index|
+        index % 4 == 0 ? character_set[((shifts[:a_shift] + character_set.index(char)) % 27)] : 
+        index % 4 == 1 ? character_set[((shifts[:b_shift] + character_set.index(char)) % 27)] :
+        index % 4 == 2 ? character_set[((shifts[:c_shift] + character_set.index(char)) % 27)] : 
+        character_set[((shifts[:d_shift] + character_set.index(char)) % 27)]
+        end
+      encrypt_msg.join
+    end
+
+    def decrypt_message(msg, shifts)
+      decrypt_msg = msg.downcase.split('').map.with_index  do |char,index|
+        index % 4 == 0 ? character_set[((character_set.index(char) - shifts[:a_shift]) % 27)] : 
+        index % 4 == 1 ? character_set[((character_set.index(char) - shifts[:b_shift]) % 27)] :
+        index % 4 == 2 ? character_set[((character_set.index(char) - shifts[:c_shift]) % 27)] : 
+        character_set[((character_set.index(char) - shifts[:d_shift]) % 27)]
+        end
+      decrypt_msg.join
+    end
+
+    def message_match(message)
+      message.match?(/^[a-zA-Z\s]*$/) ? message : (raise ArgumentError)
+    end
 end
-
-
-
-
-

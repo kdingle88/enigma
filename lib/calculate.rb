@@ -1,7 +1,8 @@
 require 'date'
 
 module Calculate
-  class << self
+  extend self
+
     def character_set
       ("a".."z").to_a << " "
     end
@@ -24,7 +25,8 @@ module Calculate
     def keys(num_string = random_number_string)
       num_list = num_sets(num_string)
 
-      { a_key: num_list[0],
+      { 
+        a_key: num_list[0],
         b_key: num_list[1],
         c_key: num_list[2],
         d_key: num_list[3]
@@ -39,6 +41,7 @@ module Calculate
       end
 
       number_string
+      
     end
     
 
@@ -71,8 +74,6 @@ module Calculate
       num_string.split('').each_cons(2).map(&:join)
     end
 
-    
-  end
 end
 
 

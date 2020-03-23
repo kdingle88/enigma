@@ -1,19 +1,20 @@
-example_id                      | status | run_time        |
-------------------------------- | ------ | --------------- |
-./spec/calculate_spec.rb[1:1:1] | passed | 0.00018 seconds |
-./spec/calculate_spec.rb[1:2:1] | passed | 0.00129 seconds |
-./spec/calculate_spec.rb[1:2:2] | passed | 0.00014 seconds |
-./spec/calculate_spec.rb[1:2:3] | passed | 0.00524 seconds |
-./spec/calculate_spec.rb[1:2:4] | passed | 0.00012 seconds |
-./spec/calculate_spec.rb[1:3:1] | passed | 0.00019 seconds |
-./spec/calculate_spec.rb[1:3:2] | passed | 0.00014 seconds |
-./spec/calculate_spec.rb[1:4:1] | passed | 0.00012 seconds |
-./spec/calculate_spec.rb[1:4:2] | passed | 0.00173 seconds |
-./spec/calculate_spec.rb[1:5:1] | passed | 0.00125 seconds |
-./spec/calculate_spec.rb[1:5:2] | passed | 0.0013 seconds  |
-./spec/calculate_spec.rb[1:5:3] | passed | 0.00009 seconds |
-./spec/calculate_spec.rb[1:6:1] | passed | 0.00013 seconds |
-./spec/calculate_spec.rb[1:6:2] | passed | 0.00013 seconds |
-./spec/enigma_spec.rb[1:1:1]    | passed | 0.00024 seconds |
-./spec/enigma_spec.rb[1:1:2]    | passed | 0.00016 seconds |
-./spec/enigma_spec.rb[1:2:1]    | passed | 0.00025 seconds |
+example_id                          | status | run_time        |
+----------------------------------- | ------ | --------------- |
+./spec/calculate_spec.rb[1:1:1]     | passed | 0.00035 seconds |
+./spec/calculate_spec.rb[1:2:1]     | passed | 0.00174 seconds |
+./spec/calculate_spec.rb[1:2:2:1]   | passed | 0.00011 seconds |
+./spec/calculate_spec.rb[1:2:2:2:1] | passed | 0.00014 seconds |
+./spec/calculate_spec.rb[1:2:2:3:1] | passed | 0.00302 seconds |
+./spec/calculate_spec.rb[1:3:1]     | passed | 0.00026 seconds |
+./spec/calculate_spec.rb[1:3:2]     | passed | 0.00022 seconds |
+./spec/calculate_spec.rb[1:4:1]     | passed | 0.00016 seconds |
+./spec/calculate_spec.rb[1:4:2]     | passed | 0.00025 seconds |
+./spec/calculate_spec.rb[1:5:1:1]   | passed | 0.00231 seconds |
+./spec/calculate_spec.rb[1:5:1:2]   | passed | 0.00218 seconds |
+./spec/calculate_spec.rb[1:6:1]     | passed | 0.00226 seconds |
+./spec/calculate_spec.rb[1:6:2]     | passed | 0.00014 seconds |
+./spec/enigma_spec.rb[1:1:1:1]      | passed | 0.00042 seconds |
+./spec/enigma_spec.rb[1:1:2:1]      | passed | 0.00016 seconds |
+./spec/enigma_spec.rb[1:2:1]        | passed | 0.00022 seconds |
+./spec/enigma_spec.rb[1:2:2:1]      | passed | 0.00018 seconds |
+./spec/enigma_spec.rb[1:3:1:1]      | passed | 3.4 seconds     |
