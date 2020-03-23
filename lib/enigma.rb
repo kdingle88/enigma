@@ -30,23 +30,23 @@ class Enigma
   end
 
   def crack(message, date = format_date)
-    num_count = 0
-    random_decrypt = decrypt(message, num_count.to_s,date)
-
-    last_four_decrypt = random_decrypt[:decryption].split('').slice(-4,4).join
-
-    until last_four_decrypt == " end"
-      num_count+= 1
-      random_decrypt = decrypt(message, num_count.to_s,date)
-      last_four_decrypt = random_decrypt[:decryption].split('').slice(-4,4).join
-    end
+  
+    key = (0..99999).to_a.select { |num| selected_decrypt?(message, num, date) }
     
-
-    random_decrypt
+    decrypt(message, key[0].to_s, date)
+    
   end
 
-
   private
+
+  def selected_decrypt?(message, num, date)
+    rdm_decrypt = decrypt(message, num.to_s,date)
+
+    last_four_decrypt = rdm_decrypt[:decryption].split('').slice(-4,4).join
+
+    last_four_decrypt == " end" ? true : false
+  end
+    
   
     def encrpyt_message(msg, shifts)
       encrypt_msg = msg.downcase.split('').map.with_index  do |char,index|
