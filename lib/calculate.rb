@@ -8,17 +8,17 @@ module Calculate
     end
 
     def format_date(date = Date.today.strftime("%m%d%y"))
-      valid_date?(date) ? date : (raise ArgumentError)
+      valid_date?(date) ? date : (raise ArgumentError, "date can only contain numbers had has to be a length of 6")
     end
 
     def offsets(formatted_date)
       last_four_digits = offset_digits(formatted_date)
   
       {
-        a_offset: last_four_digits[3],
-        b_offset: last_four_digits[2],
-        c_offset: last_four_digits[1],
-        d_offset: last_four_digits[0]
+        a_offset: last_four_digits[0],
+        b_offset: last_four_digits[1],
+        c_offset: last_four_digits[2],
+        d_offset: last_four_digits[3]
       }
     end
 
@@ -35,13 +35,6 @@ module Calculate
 
     def random_number_string
       number_string = rand(100000).to_s
-
-      while number_string.length < 5
-        number_string = '0'+ number_string
-      end
-
-      number_string
-      
     end
     
 
@@ -54,6 +47,8 @@ module Calculate
       }
       
     end
+
+    
   
 
     private
@@ -67,12 +62,16 @@ module Calculate
     def offset_digits(formatted_date)
       date_squared = formatted_date.to_i**2
 
-      date_squared.to_s.split('').last(4).join.to_i.digits
+      num = date_squared.to_s.split('').map {|x| x.to_i}.last(4)
+
+      num
     end
 
     def num_sets(num_string)
       num_string.split('').each_cons(2).map(&:join)
     end
+
+    
 
 end
 

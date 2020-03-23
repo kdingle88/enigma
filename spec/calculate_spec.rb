@@ -35,23 +35,38 @@ RSpec.describe Calculate do
           end
         end
       end
+      context 'when date is not passed in' do
+        it 'should equal todays date formatted' do
+          expect(Calculate.format_date).to eq(Date.today.strftime("%m%d%y"))
+        end
+      end
   end
 
   describe '::offsets' do
-    it 'returns hash containing last four digits of date squared' do
-      expect(Calculate.offsets('011519')).to include({a_offset:7,b_offset:3,c_offset:6,d_offset:1 })
+    context 'when date input begins with 1' do
+      it 'an obvious result' do
+        expect(Calculate.offsets('101005')).to include({a_offset:0,b_offset:0,c_offset:2,d_offset:5 })
+      end
+      it 'a more complex date' do
+        expect(Calculate.offsets('111224')).to include({a_offset:8,b_offset:1,c_offset:7,d_offset:6 })
+      end
     end
-    it 'returns hash containing last four digits of date squared test 2' do
-      expect(Calculate.offsets('011517')).to include({a_offset:1,b_offset:2,c_offset:8,d_offset:9 })
+    context 'when date input begins with 0' do
+      it 'an obvious result 1' do
+        expect(Calculate.offsets('011005')).to include({a_offset:0,b_offset:0,c_offset:2,d_offset:5 })
+      end
+      it 'a more complex date 2' do
+        expect(Calculate.offsets('011517')).to include({a_offset:1,b_offset:2,c_offset:8,d_offset:9 })
+      end
     end
   end
 
   describe '::keys' do
-    it 'splits random 5 digit number into 4 two-digit hash entries' do
+    it 'splits 5 digit number into 4 two-digit hash entries' do
       expect(Calculate.keys("02715")).to include({a_key:'02',b_key:'27',c_key:'71',d_key:'15' })
     end
 
-    it 'splits random 5 digit number into 4 two-digit hash entries test 2' do
+    it 'splits 5 digit number into 4 two-digit hash entries test 2' do
       expect(Calculate.keys("00813")).to include({a_key:'00',b_key:'08',c_key:'81',d_key:'13' })
     end
   end
@@ -61,9 +76,6 @@ RSpec.describe Calculate do
     context 'when number is generated' do
       it 'should be type string' do
         expect(Calculate.random_number_string).to be_a(String)
-      end
-      it 'returns with length of 5' do
-        expect(Calculate.random_number_string.length).to be(5)
       end
     end
   end
