@@ -30,11 +30,11 @@ class Enigma
   def crack(message, date = format_date)
     random_decrypt = decrypt(message, random_number_string,date)
 
-    last_four_decrypt = random_decrypt[:decryption].split('').last(4).join
+    last_four_decrypt = random_decrypt[:decryption].split('').slice(-4,4).join
 
     until last_four_decrypt == " end"
       random_decrypt = decrypt(message, random_number_string,date)
-      last_four_decrypt = random_decrypt[:decryption].split('').last(4).join
+      last_four_decrypt = random_decrypt[:decryption].split('').slice(-4,4).join
     end
 
     random_decrypt
