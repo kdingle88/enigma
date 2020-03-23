@@ -62,7 +62,6 @@ module Calculate
     def offset_digits(formatted_date)
       date_squared = formatted_date.to_i**2
 
-      # date_squared.to_s.split('').last(4).join.to_i.digits
       num = date_squared.to_s.split('').map {|x| x.to_i}.last(4)
 
       num

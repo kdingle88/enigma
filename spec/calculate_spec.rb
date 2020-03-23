@@ -77,9 +77,6 @@ RSpec.describe Calculate do
       it 'should be type string' do
         expect(Calculate.random_number_string).to be_a(String)
       end
-      it 'returns with length of 5' do
-        expect(Calculate.random_number_string.length).to be(5)
-      end
     end
   end
 
