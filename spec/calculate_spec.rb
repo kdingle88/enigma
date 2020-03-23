@@ -35,6 +35,11 @@ RSpec.describe Calculate do
           end
         end
       end
+      context 'when date is not passed in' do
+        it 'should equal todays date formatted' do
+          expect(Calculate.format_date).to eq(Date.today.strftime("%m%d%y"))
+        end
+      end
   end
 
   describe '::offsets' do
